@@ -1,0 +1,18 @@
+﻿<#@ template debug="true" #>
+<#@ parameter name="TableName" type="System.String" #>
+<#@ parameter name="SchemaName" type="System.String" #>
+<#@ parameter name="ViewName" type="System.String" #>
+<#@ parameter name="Username" type="System.String" #>
+
+<# //Uncomment this line to test that the host allows the engine to set the extension. #>
+<# //@ output extension=".htm" #>
+
+<# //Uncomment this line if you want to debug the generated transformation class. #>
+<# //System.Diagnostics.Debugger.Break(); #>
+
+
+CREATE VIEW [<#= this.SchemaName #>].[<#= this.ViewName #>]
+	AS SELECT * FROM [<#= this.SchemaName #>].[<#= this.TableName #>]
+GO
+GRANT SELECT ON [<#= this.SchemaName #>].[<#= this.ViewName #>] TO [<#= this.Username #>]
+GO
