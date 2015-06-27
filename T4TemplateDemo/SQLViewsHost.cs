@@ -2,9 +2,7 @@
 using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using Microsoft.VisualStudio.TextTemplating;
 
 namespace T4TemplateDemo
@@ -74,7 +72,7 @@ namespace T4TemplateDemo
                     //this is a quick way to get the code to give us the
                     //fully qualified path and name of the System assembly.
                     //---------------------------------------------------------
-                    typeof(System.Uri).Assembly.Location
+                    typeof(Uri).Assembly.Location
                 };
             }
         }
@@ -103,8 +101,8 @@ namespace T4TemplateDemo
         //---------------------------------------------------------------------
         public bool LoadIncludeText(string requestFileName, out string content, out string location)
         {
-            content = System.String.Empty;
-            location = System.String.Empty;
+            content = String.Empty;
+            location = String.Empty;
 
             //If the argument is the fully qualified path of an existing file,
             //then we are done.
@@ -264,7 +262,7 @@ namespace T4TemplateDemo
         //generated text output file based on the optional output directive 
         //if the user specifies it in the text template.
         //----------------------------------------------------------------------
-        public void SetOutputEncoding(System.Text.Encoding encoding, bool fromOutputDirective)
+        public void SetOutputEncoding(Encoding encoding, bool fromOutputDirective)
         {
             fileEncodingValue = encoding;
         }

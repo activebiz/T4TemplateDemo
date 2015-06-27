@@ -5,16 +5,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using Microsoft.VisualStudio.TextTemplating;
 
 namespace T4TemplateDemo
@@ -36,7 +27,7 @@ namespace T4TemplateDemo
             string templateFileName = null;
             if (args == null)
             {
-                throw new System.Exception("you must provide a text template file path");
+                throw new Exception("you must provide a text template file path");
             }
             templateFileName = args;
             if (templateFileName == null)
@@ -99,16 +90,20 @@ namespace T4TemplateDemo
         {
             if (dataGridTables.SelectedItems.Count > 0)
             {
-                String[] columnRestrictions = new String[4];
+                CompilerErrorCollection errors = null;
                 foreach (DataRowView selectedItem in dataGridTables.SelectedItems)
                 {
-                    var errors = ProcessTemplate(@"C:\practice\T4TemplateDemo\T4TemplateDemo\SQLViews.tt", selectedItem.Row[1].ToString(), selectedItem.Row[2].ToString());
-                    if (errors.Count > 0)
+                    errors = ProcessTemplate(@"C:\practice\T4TemplateDemo\T4TemplateDemo\SQLViews.tt", selectedItem.Row[1].ToString(), selectedItem.Row[2].ToString());
+                    if (errors.HasErrors)
                     {
-                        throw new Exception();
+                        MessageBox.Show("Error occured while processing template", "Code Generator", MessageBoxButton.OK);
+                        break;
                     }
                 }
-                
+                if (errors != null && !errors.HasErrors)
+                {
+                    MessageBox.Show("SQL Views Created!", "Code Generator", MessageBoxButton.OK);
+                }
             }
             else
             {
