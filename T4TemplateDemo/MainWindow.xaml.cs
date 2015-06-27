@@ -46,7 +46,7 @@ namespace T4TemplateDemo
             session["SchemaName"] = schema;
             session["TableName"] = table;
             session["ViewName"] = String.Format("v{0}", table);
-            session["Username"] = "abuser";
+            session["Username"] = "demo";
             var sessionHost = (ITextTemplatingSessionHost)host;
             sessionHost.Session = session;
             string input = File.ReadAllText(templateFileName);
